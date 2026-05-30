@@ -1,6 +1,13 @@
 # Project Specific
 uv.lock
 
+# Node / Next.js
+node_modules
+**/node_modules
+.next
+**/.next
+out
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
@@ -19,6 +26,7 @@ eggs/
 .eggs/
 lib/
 lib64/
+!frontend/src/lib/
 parts/
 sdist/
 var/
@@ -126,6 +134,8 @@ celerybeat.pid
 # Environments
 .env
 .venv
+.venv-user
+.uv-cache
 env/
 venv/
 ENV/

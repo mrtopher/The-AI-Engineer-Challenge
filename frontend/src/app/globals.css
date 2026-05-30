@@ -1,0 +1,154 @@
+@import "tailwindcss";
+
+:root {
+  --matrix-black: #000000;
+  --matrix-bg: #0a0f0a;
+  --matrix-green: #00ff41;
+  --matrix-green-dim: #008f11;
+  --matrix-green-glow: #39ff14;
+  --matrix-green-muted: #1a4d1a;
+  --matrix-text: #c8ffc8;
+  --matrix-border: rgba(0, 255, 65, 0.35);
+  --matrix-panel: rgba(0, 12, 0, 0.82);
+}
+
+@theme inline {
+  --color-background: var(--matrix-bg);
+  --color-foreground: var(--matrix-text);
+  --font-display: var(--font-orbitron);
+  --font-mono: var(--font-share-tech);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+}
+
+body {
+  background: var(--matrix-black);
+  color: var(--matrix-text);
+  font-family: var(--font-share-tech), "Courier New", monospace;
+}
+
+/* CRT scanline overlay */
+.scanlines::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 50;
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 0.12) 0px,
+    rgba(0, 0, 0, 0.12) 1px,
+    transparent 1px,
+    transparent 3px
+  );
+}
+
+/* Subtle vignette for depth */
+.vignette::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 40;
+  background: radial-gradient(
+    ellipse at center,
+    transparent 40%,
+    rgba(0, 0, 0, 0.65) 100%
+  );
+}
+
+.matrix-glow {
+  text-shadow:
+    0 0 4px var(--matrix-green),
+    0 0 12px rgba(0, 255, 65, 0.45);
+}
+
+.matrix-glow-strong {
+  text-shadow:
+    0 0 6px var(--matrix-green-glow),
+    0 0 18px rgba(57, 255, 20, 0.55),
+    0 0 36px rgba(0, 255, 65, 0.25);
+}
+
+.matrix-border {
+  border: 1px solid var(--matrix-border);
+  box-shadow:
+    0 0 12px rgba(0, 255, 65, 0.12),
+    inset 0 0 24px rgba(0, 255, 65, 0.04);
+}
+
+.matrix-panel {
+  background: var(--matrix-panel);
+  backdrop-filter: blur(6px);
+}
+
+@keyframes blink {
+  0%,
+  49% {
+    opacity: 1;
+  }
+  50%,
+  100% {
+    opacity: 0;
+  }
+}
+
+.cursor-blink {
+  animation: blink 1s step-end infinite;
+}
+
+@keyframes pulse-glow {
+  0%,
+  100% {
+    box-shadow: 0 0 8px rgba(0, 255, 65, 0.2);
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(0, 255, 65, 0.45);
+  }
+}
+
+.pulse-glow {
+  animation: pulse-glow 2.5s ease-in-out infinite;
+}
+
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.message-enter {
+  animation: fade-in-up 0.35s ease-out forwards;
+}
+
+/* Custom scrollbar for chat */
+.chat-scroll::-webkit-scrollbar {
+  width: 6px;
+}
+
+.chat-scroll::-webkit-scrollbar-track {
+  background: rgba(0, 20, 0, 0.4);
+}
+
+.chat-scroll::-webkit-scrollbar-thumb {
+  background: var(--matrix-green-dim);
+  border-radius: 3px;
+}
+
+.chat-scroll::-webkit-scrollbar-thumb:hover {
+  background: var(--matrix-green);
+}

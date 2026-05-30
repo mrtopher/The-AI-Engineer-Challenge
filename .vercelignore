@@ -1,0 +1,40 @@
+# Dependencies — installed during Vercel build, not uploaded
+node_modules
+**/node_modules
+
+# Python virtualenv — not needed for @vercel/python deploys
+.venv
+**/.venv
+.venv-user
+**/.venv-user
+.uv-cache
+**/.uv-cache
+venv
+**/venv
+
+# Next.js build output — rebuilt on Vercel
+.next
+**/.next
+out
+**/out
+
+# Python / tooling caches
+__pycache__
+**/__pycache__
+*.pyc
+.mypy_cache
+.pytest_cache
+.ruff_cache
+
+# Local env and IDE
+.env
+.env.*
+!.env.example
+!.env.local.example
+
+# Jupyter / notebooks (not needed at runtime)
+.ipynb_checkpoints
+*.ipynb
+
+# Git metadata
+.git
